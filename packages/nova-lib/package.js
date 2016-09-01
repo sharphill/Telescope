@@ -1,7 +1,7 @@
 Package.describe({
   name: 'nova:lib',
   summary: 'Telescope libraries.',
-  version: '0.26.5-nova',
+  version: '0.27.0-nova',
   git: "https://github.com/TelescopeJS/Telescope.git"
 });
 
@@ -17,7 +17,7 @@ Package.onUse(function (api) {
     'mongo',
     'tracker',
     'service-configuration',
-    'standard-minifiers@1.0.5',
+    'standard-minifiers@1.0.6',
     'modules@0.5.2',
     'accounts-base',
     'check',
@@ -28,11 +28,12 @@ Package.onUse(function (api) {
     'react-meteor-data@0.2.8',
     'service-configuration',
     'apollo',
+    'shell-server',
     
     // Third-party packages
 
     'aldeed:simple-schema@1.5.3',
-    'aldeed:collection2@2.9.1',
+    'aldeed:collection2@2.10.0',
     'meteorhacks:picker@1.0.3',
     'dburles:collection-helpers@1.0.4',
     'matb33:collection-hooks@0.8.1',
