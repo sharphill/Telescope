@@ -1,16 +1,20 @@
-import { createStore, compose, combineReducers, } from 'redux';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import ApolloClient from 'apollo-client';
+
 import Telescope from 'meteor/nova:lib';
 
-const rootReducer = combineReducers(Telescope.reducers); 
+const client = new ApolloClient();
 
-const defaultState = {
-  messages: [],
-};
+const rootReducer = combineReducers({...Telescope.reducers, apollo: client.reducer()}); 
 
-const enhancers = compose(
-  typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f
+const store = createStore(
+  // reducers
+  rootReducer,
+  // middlewares
+  compose(
+    applyMiddleware(client.middleware()),
+    typeof window !== "undefined" && window.devToolsExtension ? window.devToolsExtension() : f => f
+  ),
 );
 
-const store = createStore(rootReducer, defaultState);
-
-export default store;
+export { store, client };

@@ -12,9 +12,8 @@ import Helmet from 'react-helmet';
 import Cookie from 'react-cookie';
 import ReactDOM from 'react-dom';
 
-// redux
-import { Provider } from 'react-redux';
-import store from "./store.js";
+import { ApolloProvider } from 'react-apollo';
+import { store, client } from "./store.js";
 
 Telescope.routes.indexRoute = { name: "posts.list", component: Telescope.components.PostsHome };
 
@@ -29,9 +28,9 @@ Meteor.startup(() => {
   ]);
   
   const ProvidedApp = (props) => (
-    <Provider store={store}>
+    <ApolloProvider store={store} client={client}>
       <Telescope.components.App {...props} />
-    </Provider>
+    </ApolloProvider>
   );
 
   const AppRoutes = {
