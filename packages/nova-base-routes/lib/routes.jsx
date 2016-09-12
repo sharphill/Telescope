@@ -24,7 +24,8 @@ Meteor.startup(() => {
     {name:"posts.single",   path:"posts/:_id(/:slug)", component:Telescope.components.PostsSingle},
     {name:"users.single",   path:"users/:slug",        component:Telescope.components.UsersSingle},
     {name:"users.account",  path:"account",            component:Telescope.components.UsersAccount},
-    {name:"users.edit",     path:"users/:slug/edit",   component:Telescope.components.UsersAccount}
+    {name:"users.edit",     path:"users/:slug/edit",   component:Telescope.components.UsersAccount},
+    {name:"posts.apollo",   path:"apollo",             component:Telescope.components.PostsApollo},
   ]);
   
   const ProvidedApp = (props) => (
@@ -60,6 +61,9 @@ Meteor.startup(() => {
     preRender: (req, res) => {
       Cookie.plugToRequest(req, res);
     },
+    fetchDataHook: (components) => {
+      // this is where ssr & apollo should interact
+    }
   };
   
   ReactRouterSSR.Run(AppRoutes, clientOptions, serverOptions);

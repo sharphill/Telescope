@@ -24,10 +24,10 @@ nova:subscribe
 
 ############ Customizable Packages ############
 
+nova:base-apollo
 nova:base-components
 nova:base-styles
 nova:base-routes
-nova:base-apollo
 nova:email-templates
 nova:i18n-en-us
 
