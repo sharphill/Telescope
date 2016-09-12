@@ -27,7 +27,7 @@ Package.onUse(function (api) {
     'ecmascript@0.4.2',
     'react-meteor-data@0.2.8',
     'service-configuration',
-    'apollo',
+    'apollo@0.1.0',
     'shell-server',
     
     // Third-party packages

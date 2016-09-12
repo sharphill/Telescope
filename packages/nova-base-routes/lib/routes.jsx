@@ -61,8 +61,12 @@ Meteor.startup(() => {
     preRender: (req, res) => {
       Cookie.plugToRequest(req, res);
     },
+    // see https://github.com/thereactivestack/meteor-react-router-ssr/blob/9762f12c5d5512c5cfee8663a29428f7e4c141f8/lib/server.jsx#L241-L257
     fetchDataHook: (components) => {
-      // this is where ssr & apollo should interact
+      console.log('this is where ssr & apollo should interact')
+      return [new Promise((resolve, reject) => {
+        resolve();
+      })];
     }
   };
   

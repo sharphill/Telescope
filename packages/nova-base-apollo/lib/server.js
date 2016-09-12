@@ -1,40 +1,19 @@
-import express from 'express';
-import Schema from './schema';
-import Mocks from './mocks';
-import Resolvers from './resolvers';
-import { PostsConnector } from './resolvers';
-
-import { apolloExpress, graphiqlExpress } from 'apollo-server';
+import { createApolloServer } from 'meteor/apollo';
 import { makeExecutableSchema, addMockFunctionsToSchema } from 'graphql-tools';
-import bodyParser from 'body-parser';
 
-const GRAPHQL_PORT = 8080;
-const graphQLServer = express();
+import typeDefs from './schema';
+import resolvers from './resolvers';
 
-const executableSchema = makeExecutableSchema({
-  typeDefs: Schema,
-  resolvers: Resolvers,
-  // connectors: { PostsConnector },
+const schema = makeExecutableSchema({
+  typeDefs,
+  resolvers,
 });
 
-// addMockFunctionsToSchema({
-//   schema: executableSchema,
-//   mocks: Mocks,
-//   preserveResolvers: true,
-// });
+createApolloServer({
+  schema,
+});
 
-// `context` must be an object and can't be undefined when using connectors
-graphQLServer.use('/graphql', bodyParser.json(), apolloExpress({
-  schema: executableSchema,
-  context: {}, //at least(!) an empty object
-}));
-
-graphQLServer.use('/graphiql', graphiqlExpress({
-  endpointURL: '/graphql',
-}));
-
-graphQLServer.listen(GRAPHQL_PORT, () => console.log(
-  `GraphQL Server is now running on http://localhost:${GRAPHQL_PORT}/graphql`
-));
-
-WebApp.connectHandlers.use(Meteor.bindEnvironment(graphQLServer));
+// notes:
+// it was done before without Meteor integration : https://github.com/TelescopeJS/Telescope/blob/8e9b89eebc3093d5b5b5d4e497f15f13d641743a/packages/nova-base-apollo/lib/server.js
+// as Apollo Meteor integration has been updated (0.1.0), it's better to use it (handle current meteor user)!
+// what's done under the hood : https://github.com/apollostack/meteor-integration/blob/master/main-server.js
