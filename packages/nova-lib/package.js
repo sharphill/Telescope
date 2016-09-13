@@ -24,7 +24,7 @@ Package.onUse(function (api) {
     'http',
     'email',
     'tracker',
-    'ecmascript@0.4.2',
+    'ecmascript@0.5.8',
     'react-meteor-data@0.2.8',
     'service-configuration',
     'apollo@0.1.0',
