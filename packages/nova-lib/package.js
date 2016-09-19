@@ -47,7 +47,8 @@ Package.onUse(function (api) {
     'utilities:smart-publications@0.1.4',
     'utilities:smart-methods@0.1.4',
     'meteorhacks:inject-initial@1.0.4',
-    'peerlibrary:reactive-publish@0.2.0'
+    'peerlibrary:reactive-publish@0.2.0',
+    'kuip:schema-graphql-bridge@1.0.2',
   ];
 
   api.use(packages);
