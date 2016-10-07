@@ -25,7 +25,7 @@ Meteor.startup(() => {
     {name:"users.single",   path:"users/:slug",        component:Telescope.components.UsersSingle},
     {name:"users.account",  path:"account",            component:Telescope.components.UsersAccount},
     {name:"users.edit",     path:"users/:slug/edit",   component:Telescope.components.UsersAccount},
-    {name:"posts.apollo",   path:"apollo",             component:Telescope.components.PostsApolloList},
+    {name:"posts.apollo",   path:"apollo",             component:Telescope.components.PostsApolloSingle},
   ]);
   
   const ProvidedApp = (props) => (
@@ -40,8 +40,6 @@ Meteor.startup(() => {
     indexRoute: Telescope.routes.indexRoute,
     childRoutes: Telescope.routes.routes
   };
-
-  let history;
 
   const clientOptions = {
     renderHook: ReactDOM.render,
@@ -73,6 +71,7 @@ Meteor.startup(() => {
   ReactRouterSSR.Run(AppRoutes, clientOptions, serverOptions);
   
   // note: we did like this at first
+  // let history;
   // if (Meteor.isClient) {
   //   history = useNamedRoutes(useRouterHistory(createBrowserHistory))({ routes: AppRoutes });
   // }
